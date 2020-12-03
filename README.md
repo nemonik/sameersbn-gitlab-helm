@@ -15,7 +15,7 @@ helm install --set gitlab.host="gitlab.example.com" \
    --set gitlab.secrets.dbKeyBase="long-and-random-alpha-numeric-string" \
    --set gitlab.secrets.secretKeyBase="long-and-random-alpha-numeric-string" \
    --set gitlab.secrets.otpKeyBase="long-and-random-alpha-numeric-string" \
-   --set GITLAB_oTTPS="true" --set GITLAB_PORT="80" \
+   --set GITLAB_HTTPS="true" --set GITLAB_PORT="80" \
    --set redis.persistence.enabled="true" \
    --set redis.persistence.storageClassName="local-path" \
    --set postgresql.persistence.enabled="true" \
