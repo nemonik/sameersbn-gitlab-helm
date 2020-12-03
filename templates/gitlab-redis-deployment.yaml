@@ -1,0 +1,60 @@
+{{- if .Values.redis.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "gitlab.fullname" . }}-redis
+  labels:
+    app: {{ template "gitlab.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    component: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "gitlab.name" . }}
+      release: {{ .Release.Name }}
+      component: redis
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: {{ template "gitlab.name" . }}
+        release: {{ .Release.Name }}
+        component: redis
+    spec:
+      containers:
+      - name: redis
+        image: {{ .Values.redis.image.repository }}:{{ .Values.redis.image.tag }}
+        imagePullPolicy: {{ .Values.redis.image.pullPolicy }}
+        ports:
+        - name: redis
+          containerPort: 6379
+        volumeMounts:
+        - mountPath: /var/lib/redis
+          name: gitlab-redis
+        livenessProbe:
+          exec:
+            command:
+            - redis-cli
+            - ping
+          initialDelaySeconds: 30
+          timeoutSeconds: 5
+        readinessProbe:
+          exec:
+            command:
+            - redis-cli
+            - ping
+          initialDelaySeconds: 5
+          timeoutSeconds: 1
+      volumes:
+      - name: gitlab-redis
+      {{- if .Values.redis.persistence.enabled }}
+        persistentVolumeClaim:
+          claimName: {{ include "gitlab.fullname" . }}-redis
+      {{- else }}
+        emptyDir: {}
+      {{- end }}
+{{- end }}

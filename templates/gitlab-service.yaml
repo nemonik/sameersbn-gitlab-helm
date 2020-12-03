@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "gitlab.fullname" . }}
+  labels:
+    app: {{ include "gitlab.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  ports:
+    {{- if eq .Values.gitlab.https "false"}}
+    - name: http
+      targetPort: http
+      port: {{ .Values.gitlab.port }}
+    {{- else }}
+    - name: https
+      targetPort: https
+      port: {{ .Values.gitlab.port }}
+    {{- end }}
+    - name: ssh
+      targetPort: ssh
+    {{- if empty .Values.gitlab.ssh.port }}
+      port: {{ .Values.gitlab.ssh.listenPort }}
+    {{- else }}
+      port: {{ .Values.gitlab.ssh.port }}
+    {{- end }}
+  selector:
+    app: {{ template "gitlab.name" . }}
+    release: {{ .Release.Name }}
+    component: gitlab

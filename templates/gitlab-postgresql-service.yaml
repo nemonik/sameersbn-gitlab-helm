@@ -1,0 +1,20 @@
+{{- if .Values.postgresql.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "gitlab.fullname" . }}-postgresql
+  labels:
+    app: {{ template "gitlab.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  ports:
+  - name: postgresql
+    port: {{ .Values.postgresql.port }}
+    targetPort: postgresql
+  selector:
+    app: {{ template "gitlab.name" . }}
+    release: {{ .Release.Name }}
+    component: postgresql
+{{- end }}

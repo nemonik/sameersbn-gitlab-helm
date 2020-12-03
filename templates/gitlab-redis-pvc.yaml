@@ -1,0 +1,19 @@
+{{- if .Values.redis.persistence.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ template "gitlab.fullname" . }}-redis
+  labels:
+    app: {{ include "gitlab.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    component: redis
+spec:
+  accessModes:
+  - {{ .Values.redis.persistence.accessMode | quote }}
+  storageClassName: {{ .Values.redis.persistence.storageClassName | quote }}
+  resources:
+    requests:
+      storage: {{ .Values.redis.persistence.size | quote }}
+{{- end }}
