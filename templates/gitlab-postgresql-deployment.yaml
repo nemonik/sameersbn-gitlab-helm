@@ -77,7 +77,7 @@ spec:
       - name: gitlab-postgresql
       {{- if .Values.postgresql.persistence.enabled }}
         persistentVolumeClaim:
-          claimName: {{ template "gitlab.fullname" . }}-postgreql
+          claimName: {{ template "gitlab.fullname" . }}-postgresql
       {{- else }}
         emptyDir: {}
       {{- end }}
