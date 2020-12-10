@@ -1019,7 +1019,7 @@ gitlab:
     ##
     encoding: 'utf8'
 
-    ## The database server hostname. GitLab will be wired to the postgreql pod if
+    ## The database server hostname. GitLab will be wired to the postgresql pod if
     ## `{{ .Values.postgresql.enabled }}` is `true`.  Otherwise, GitLab will connect
     ## to the value provided.  Defaults to not being set.
     ##
