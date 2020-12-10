@@ -2,13 +2,13 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ template "gitlab.fullname" . }}-postgreql
+  name: {{ template "gitlab.fullname" . }}-postgresql
   labels:
     app: {{ template "gitlab.name" . }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
-    component: postgreql
+    component: postgresql
 spec:
   accessModes:
   - {{ .Values.postgresql.persistence.accessMode | quote }}
