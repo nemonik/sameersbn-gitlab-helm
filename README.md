@@ -10,11 +10,11 @@ Written for Helm 3.
 
 ```
 kubectl create namespace gitlab
-helm install --set gitlab.host="gitlab.example.com" \
-   --set gitlab.signupEnabled="false" \
-   --set gitlab.secrets.dbKeyBase="long-and-random-alpha-numeric-string" \
-   --set gitlab.secrets.secretKeyBase="long-and-random-alpha-numeric-string" \
-   --set gitlab.secrets.otpKeyBase="long-and-random-alpha-numeric-string" \
+helm install --set gitlab.env.host="gitlab.example.com" \
+   --set gitlab.env.signupEnabled="false" \
+   --set gitlab.env.secrets.dbKeyBase="long-and-random-alpha-numeric-string" \
+   --set gitlab.env.secrets.secretKeyBase="long-and-random-alpha-numeric-string" \
+   --set gitlab.env.secrets.otpKeyBase="long-and-random-alpha-numeric-string" \
    --set redis.persistence.enabled="true" \
    --set redis.persistence.storageClassName="local-path" \
    --set postgresql.persistence.enabled="true" \
