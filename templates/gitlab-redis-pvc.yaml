@@ -11,9 +11,9 @@ metadata:
     component: redis
 spec:
   accessModes:
-  - {{ .Values.redis.persistence.accessMode | quote }}
-  storageClassName: {{ .Values.redis.persistence.storageClassName | quote }}
+  - {{ .Values.redis.persistence.accessMode }}
+  storageClassName: {{ .Values.redis.persistence.storageClassName }}
   resources:
     requests:
-      storage: {{ .Values.redis.persistence.size | quote }}
+      storage: {{ .Values.redis.persistence.size }}
 {{- end }}

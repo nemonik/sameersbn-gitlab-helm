@@ -11,9 +11,9 @@ metadata:
     component: postgresql
 spec:
   accessModes:
-  - {{ .Values.postgresql.persistence.accessMode | quote }}
-  storageClassName: {{ .Values.postgresql.persistence.storageClassName | quote }}
+  - {{ .Values.postgresql.persistence.accessMode }}
+  storageClassName: {{ .Values.postgresql.persistence.storageClassName }}
   resources:
     requests:
-      storage: {{ .Values.postgresql.persistence.size | quote }}
+      storage: {{ .Values.postgresql.persistence.size }}
 {{- end }}

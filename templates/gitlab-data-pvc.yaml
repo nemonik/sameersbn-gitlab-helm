@@ -11,9 +11,9 @@ metadata:
     component: gitlab
 spec:
   accessModes:
-  - {{ .Values.gitlab.persistence.data.accessMode | quote }}
-  storageClassName: {{ .Values.gitlab.persistence.data.storageClassName | quote }}
+  - {{ .Values.gitlab.persistence.data.accessMode }}
+  storageClassName: {{ .Values.gitlab.persistence.data.storageClassName}}
   resources:
     requests:
-      storage: {{ .Values.gitlab.persistence.data.size | quote }}
+      storage: {{ .Values.gitlab.persistence.data.size }}
 {{- end }}

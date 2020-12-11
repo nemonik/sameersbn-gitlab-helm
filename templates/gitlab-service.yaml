@@ -9,21 +9,15 @@ metadata:
     heritage: {{ .Release.Service }}
 spec:
   ports:
-    {{- if eq .Values.gitlab.https "false"}}
     - name: http
       targetPort: http
-      port: {{ .Values.gitlab.port }}
-    {{- else }}
-    - name: https
-      targetPort: https
-      port: {{ .Values.gitlab.port }}
-    {{- end }}
+      port: {{ .Values.gitlab.env.port | int }}
     - name: ssh
       targetPort: ssh
-    {{- if empty .Values.gitlab.ssh.port }}
-      port: {{ .Values.gitlab.ssh.listenPort }}
+    {{- if empty .Values.gitlab.env.ssh.port }}
+      port: {{ .Values.gitlab.env.ssh.listenPort | int }}
     {{- else }}
-      port: {{ .Values.gitlab.ssh.port }}
+      port: {{ .Values.gitlab.env.ssh.port | int }}
     {{- end }}
   selector:
     app: {{ template "gitlab.name" . }}
