@@ -11,20 +11,10 @@ spec:
   ports:
     - name: http
       targetPort: http
-      {{- if ne .Values.gitlab.env.port "" }}
-      port: {{ .Values.gitlab.env.port | int }}
-      {{-  else if .Values.gitlab.env.https }}
-      port: 443
-      {{- else }}
       port: 80
-      {{- end }}
     - name: ssh
       targetPort: ssh
-    {{- if empty .Values.gitlab.env.ssh.port }}
-      port: {{ .Values.gitlab.env.ssh.listenPort | int }}
-    {{- else }}
-      port: {{ .Values.gitlab.env.ssh.port | int }}
-    {{- end }}
+      port: 22
   selector:
     app: {{ template "gitlab.name" . }}
     release: {{ .Release.Name }}
