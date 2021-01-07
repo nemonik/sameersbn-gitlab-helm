@@ -44,11 +44,11 @@ spec:
         - name: GITLAB_PORT
           {{- if ne .Values.gitlab.env.port "" }}
           value: {{ .Values.gitlab.env.port | quote }}
-          {{  else if .Values.gitlab.env.https }}
+          {{-  else if .Values.gitlab.env.https }}
           value: "443"
-          {{ else }}
+          {{- else }}
           value: "80"
-          {{ end }}
+          {{- end }}
 
         - name: GITLAB_SECRETS_DB_KEY_BASE
           valueFrom:
