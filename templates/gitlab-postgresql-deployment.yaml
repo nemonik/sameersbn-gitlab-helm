@@ -42,13 +42,11 @@ spec:
             secretKeyRef:
               name: {{ template "gitlab.fullname" . }}
               key: dbPassword
-        #   value: {{ .Values.postgresql.db.pass }}
         - name: DB_USER
           valueFrom:
             secretKeyRef:
               name: {{ template "gitlab.fullname" . }}
               key: dbUser
-        #   value: {{ .Values.postgresql.db.user }}
         volumeMounts:
         - mountPath: /var/lib/postgresql
           name: gitlab-postgresql
