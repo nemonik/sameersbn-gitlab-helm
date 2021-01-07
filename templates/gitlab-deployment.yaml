@@ -55,19 +55,16 @@ spec:
             secretKeyRef:
               name: {{ include "gitlab.fullname" .  }}
               key: dbKeyBase
-          # value: {{ .Values.gitlab.env.secrets.dbKeyBase | quote }}
         - name: GITLAB_SECRETS_SECRET_KEY_BASE
           valueFrom:
             secretKeyRef:
               name: {{ include "gitlab.fullname" .  }}
               key: secretKeyBase
-          # value: {{ .Values.gitlab.env.secrets.secretKeyBase | quote }}
         - name: GITLAB_SECRETS_OTP_KEY_BASE
           valueFrom:
             secretKeyRef:
               name: {{ include "gitlab.fullname" .  }}
               key: otpKeyBase
-          # value: {{ .Values.gitlab.env.secrets.otpKeyBase | quote }}
 
         - name: GITLAB_TIMEZONE
           value: {{ .Values.gitlab.env.timezone | quote }}
@@ -77,7 +74,6 @@ spec:
             secretKeyRef:
               name: {{ include "gitlab.fullname" .  }}
               key: rootPassword
-          # value: {{ .Values.gitlab.env.rootPassword | quote }}
 
         - name: GITLAB_ROOT_EMAIL
           value: {{ .Values.gitlab.env.rootEmail | quote }}
