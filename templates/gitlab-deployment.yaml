@@ -42,7 +42,13 @@ spec:
         - name: GITLAB_CI_HOST
           value: {{ .Values.gitlab.env.ciHost | quote }}
         - name: GITLAB_PORT
+          {{- if ne .Values.gitlab.env.port "" }}
           value: {{ .Values.gitlab.env.port | quote }}
+          {{  else if .Values.gitlab.env.https }}
+          value: "443"
+          {{ else }}
+          value: "80"
+          {{ end }}
 
         - name: GITLAB_SECRETS_DB_KEY_BASE
           valueFrom:
