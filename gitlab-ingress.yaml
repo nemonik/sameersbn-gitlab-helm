@@ -1,0 +1,17 @@
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: gitlab-ingress
+  namespace: gitlab
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: 'true'
+spec:
+  rules:
+  - host: gitlab.example.com
+    http:
+      paths:
+      -  path: /
+         backend:
+           serviceName: gitlab-gitlab
+           servicePort: http

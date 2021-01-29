@@ -21,6 +21,13 @@ redis:
     storageClassName: 'default'
     accessMode: 'ReadWriteOnce'
 
+  ## Select node(s) to deploy to matching one specific label name and one or
+  ## more values
+  nodeAffinity:
+    selectorMatch:
+      key: ''
+      values: ''
+
   ## The port Redis listens on. The default is `6379`.
   ##
   port: 6379
@@ -47,6 +54,13 @@ postgresql:
     ##
     storageClassName: 'default'
     accessMode: 'ReadWriteOnce'
+
+  ## Select node(s) to deploy to matching one specific label name and one or
+  ## more values
+  nodeAffinity:
+    selectorMatch:
+      key: ''
+      values: ''
 
   ## The port PostgreSQL listens on. The default is `5432`.
   ##
@@ -91,6 +105,13 @@ gitlab:
       storageClassName: 'default'
       accessMode: 'ReadWriteOnce'
 
+  ## Select node(s) to deploy to matching one specific label name and one or 
+  ## more values
+  nodeAffinity:
+    selectorMatch:
+      key: ''
+      values: ''
+
   ## All the values are environmental and must all be strings
   env:
 
@@ -115,7 +136,7 @@ gitlab:
     ## on. Defaults to `443` if `{{ .Values.gitlab.https }}=true`, else defaults
     ## to `80`.
     ##
-    port: '80'
+    port: ''
 
     secrets:
       ## Encryption key for GitLab CI secret variables, as well as import

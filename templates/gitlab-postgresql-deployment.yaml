@@ -25,6 +25,19 @@ spec:
         release: {{ .Release.Name }}
         component: postgresql
     spec:
+      {{- if and .Values.gitlab.nodeAffinity.selectorMatch.key .Values.gitlab.nodeAffinity.selectorMatch.values }}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: {{ .Values.gitlab.nodeAffinity.selectorMatch.key }}
+                operator: In
+                values:
+                {{- range .Values.gitlab.nodeAffinity.selectorMatch.values }}
+                - {{ . }}
+                {{- end }}
+      {{- end }}
       containers:
       - name: postgresql
         image: {{ .Values.postgresql.image.repository }}:{{ .Values.postgresql.image.tag }}
@@ -42,11 +55,13 @@ spec:
             secretKeyRef:
               name: {{ template "gitlab.fullname" . }}
               key: dbPassword
+        #   value: {{ .Values.postgresql.db.pass }}
         - name: DB_USER
           valueFrom:
             secretKeyRef:
               name: {{ template "gitlab.fullname" . }}
               key: dbUser
+        #   value: {{ .Values.postgresql.db.user }}
         volumeMounts:
         - mountPath: /var/lib/postgresql
           name: gitlab-postgresql

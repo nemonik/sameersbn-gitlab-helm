@@ -24,6 +24,19 @@ spec:
         release: {{ .Release.Name }}
         component: gitlab
     spec:
+      {{- if and .Values.gitlab.nodeAffinity.selectorMatch.key .Values.gitlab.nodeAffinity.selectorMatch.values }}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: {{ .Values.gitlab.nodeAffinity.selectorMatch.key }}
+                operator: In
+                values:
+                {{- range .Values.gitlab.nodeAffinity.selectorMatch.values }}
+                - {{ . }}
+                {{- end }}
+      {{- end }}
       containers:
       - name: gitlab
         image: {{ .Values.gitlab.image.repository }}:{{ .Values.gitlab.image.tag }}
@@ -65,6 +78,9 @@ spec:
             secretKeyRef:
               name: {{ include "gitlab.fullname" .  }}
               key: otpKeyBase
+
+        - name: TZ
+          value: {{ .Values.gitlab.env.timezone | quote }}
 
         - name: GITLAB_TIMEZONE
           value: {{ .Values.gitlab.env.timezone | quote }}
@@ -470,13 +486,11 @@ spec:
             secretKeyRef:
               name: {{ include "gitlab.fullname" . }}
               key: dbPassword
-        #   value: {{ .Values.gitlab.env.db.pass | quote }}
         - name: DB_USER
           valueFrom:
             secretKeyRef:
               name: {{ include "gitlab.fullname" .  }}
               key: dbUser
-        #   value:  {{ .Values.gitlab.env.db.user | quote }}
         - name: DB_PORT
           value: {{ .Values.gitlab.env.db.port | quote }}
         - name: DB_POOL
