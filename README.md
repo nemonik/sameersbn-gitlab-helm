@@ -54,7 +54,7 @@ gitlab:
     signupEnabled: 'false'
 ```
 
-Then a file with this script, e.g. `install.sh`:
+Then create this bash script, e.g. `install.sh`:
 
 ```
 #!/bin/bash
