@@ -1,0 +1,40 @@
+redis:
+  persistence:
+    storageClassName: local-path
+    enabled: true
+
+  nodeAffinity:
+    selectorMatch:
+      key: 'k3s.io/hostname'
+      values:
+      - 'k3s-worker-0.example.com'
+
+
+postgresql:
+  persistence:
+    storageClassName: local-path
+    enabled: true
+
+  nodeAffinity:
+    selectorMatch:
+      key: 'k3s.io/hostname'
+      values:
+      - 'k3s-worker-0.example.com'
+
+
+gitlab:
+  persistence:
+    data:
+      storageClassName: local-path
+      enabled: true
+
+  nodeAffinity:
+    selectorMatch:
+      key: 'k3s.io/hostname'
+      values:
+      - 'k3s-worker-0.example.com'
+
+  env:
+    host: 'gitlab.example.org'
+
+    signupEnabled: 'false'
