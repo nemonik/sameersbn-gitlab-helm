@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ template "gitlab.fullname" . }}
   labels:
@@ -9,14 +9,13 @@ metadata:
     heritage: {{ .Release.Service }}
     component: gitlab
 spec:
+  serviceName: {{ template "gitlab.fullname" . }}
   replicas: 1
   selector:
     matchLabels:
       app: {{ template "gitlab.name" . }}
       release: {{ .Release.Name }}
       component: gitlab
-  strategy:
-    type: Recreate
   template:
     metadata:
       labels:
@@ -41,6 +40,13 @@ spec:
       - name: gitlab
         image: {{ .Values.gitlab.image.repository }}:{{ .Values.gitlab.image.tag }}
         imagePullPolicy: {{ .Values.gitlab.image.pullPolicy }}
+        resources:
+          limits:
+            cpu: {{ .Values.gitlab.resources.limits.cpu }}
+            memory: {{ .Values.gitlab.resources.limits.memory }}
+          requests:
+            cpu: {{ .Values.gitlab.resources.requests.cpu }}
+            memory: {{ .Values.gitlab.resources.requests.memory }}
         ports:
         - name: http
           containerPort: 80

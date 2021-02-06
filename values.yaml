@@ -112,6 +112,15 @@ gitlab:
       key: ''
       values: ''
 
+  ## Set the resource limits for GitLab
+  resources:
+    limits:
+      cpu: '2'
+      memory: '4Gi'
+    requests:
+      cpu: '500m'
+      memory: '1Gi'
+
   ## All the values are environmental and must all be strings
   env:
 

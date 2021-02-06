@@ -1,6 +1,6 @@
 {{- if .Values.postgresql.enabled }}
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ template "gitlab.fullname" . }}-postgresql
   labels:
@@ -10,14 +10,13 @@ metadata:
     heritage: {{ .Release.Service }}
     component: postgresql
 spec:
+  serviceName: {{ template "gitlab.fullname" . }}-postgresql
   replicas: 1
   selector:
     matchLabels:
       app: {{ template "gitlab.name" . }}
       release: {{ .Release.Name }}
       component: postgresql
-  strategy:
-    type: Recreate
   template:
     metadata:
       labels:
