@@ -1,0 +1,18 @@
+apiVersion: v1
+entries:
+  gitlab:
+  - apiVersion: v2
+    appVersion: 13.8.2
+    created: "2021-02-09T21:58:00.549840491Z"
+    description: A Helm chart for GitLab
+    digest: 5ac320486ac6bec09c4f7339aba487674edfc321b852c3d41d37cb6a734fb73e
+    icon: https://avatars.githubusercontent.com/u/176152?s=460&v=4
+    maintainers:
+    - email: github.com@nemonik.com
+      name: Michael Joseph Walsh
+    name: gitlab
+    type: application
+    urls:
+    - https://nemonik.github.io/sameersbn-gitlab-helm/gitlab-13.8.2.tgz
+    version: 13.8.2
+generated: "2021-02-09T21:58:00.545598748Z"
