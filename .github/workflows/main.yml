@@ -28,8 +28,8 @@ jobs:
           rm -Rf example_values.yaml gitlab-ingress.yaml example_install.sh .github .gitignore robot.txt
           helm package .
           cp *.tgz ${GITHUB_WORKSPACE}/.
-          cp index.yaml ${GITHUB_WORKSPACE}/.
           cd ${GITHUB_WORKSPACE}
+          helm repo index --url https://nemonik.github.io/sameersbn-gitlab-helm/ .
           
       - name: Commit and push changes
         uses: actions-js/push@master
