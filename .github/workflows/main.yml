@@ -20,7 +20,7 @@ jobs:
       - name: Package chart
         run: helm package .
 
-     - name: Commit and push changes
-       uses: actions-js/push@master
-       with:
-         github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit and push changes
+        uses: actions-js/push@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
