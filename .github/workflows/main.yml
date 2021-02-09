@@ -19,5 +19,7 @@ jobs:
 
       - name: Package chart
         run: |
-          pwd
-
+          project=$(pwd)
+          cd /tmp
+          cp -R $project .
+          env
