@@ -34,4 +34,4 @@ jobs:
         uses: actions-js/push@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          message: packaged for helm via action 
+          message: 'packaged for helm via action'
