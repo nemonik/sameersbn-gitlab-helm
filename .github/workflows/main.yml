@@ -18,9 +18,6 @@ jobs:
         run: helm lint .
 
       - name: Package chart
-        run: helm package .
+        run: |
+          pwd
 
-      - name: Commit and push changes
-        uses: actions-js/push@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
