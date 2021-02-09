@@ -19,7 +19,18 @@ jobs:
 
       - name: Package chart
         run: |
-          project=$(pwd)
+          PROJECT=$(basename ${GITHUB_WORKSPACE})
           cd /tmp
-          cp -R $project .
-          env
+          cp -R ${GITHUB_WORKSPACE} ${PROJECT}
+          cd ${PROJECT}
+          rm -Rf .git
+          rm *.tgz
+          rm -Rf example_values.yaml gitlab-ingress.yaml example_install.sh .github .gitignore
+          helm package .
+          cp *.tgz ${GITHUB_WORKSPACE}/.
+          cd ${GITHUB_WORKSPACE}
+          
+      - name: Commit and push changes
+        uses: actions-js/push@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
