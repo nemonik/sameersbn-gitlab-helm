@@ -1,0 +1,26 @@
+name: Package changes so helm can access
+
+on:
+  push:
+    branches:
+      - master
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: lint chart
+        run: helm lint .
+
+      - name: Package chart
+        run: helm package .
+
+     - name: Commit & Push changes
+       uses: actions-js/push@master
+       with:
+         github_token: ${{ secrets.GITHUB_TOKEN }}
