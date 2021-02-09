@@ -25,7 +25,7 @@ jobs:
           cd ${PROJECT}
           rm -Rf .git
           rm *.tgz
-          rm -Rf example_values.yaml gitlab-ingress.yaml example_install.sh .github .gitignore
+          rm -Rf example_values.yaml gitlab-ingress.yaml example_install.sh .github .gitignore robot.txt
           helm package .
           cp *.tgz ${GITHUB_WORKSPACE}/.
           cd ${GITHUB_WORKSPACE}
@@ -34,3 +34,4 @@ jobs:
         uses: actions-js/push@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          message: packaged for helm via action 
