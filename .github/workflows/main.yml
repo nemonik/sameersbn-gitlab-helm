@@ -35,6 +35,11 @@ jobs:
           pwd
           echo "grr ${GITHUB_WORKSPACE}"
           rsync -av --progress ${GITHUB_WORKSPACE} . --exclude helm-charts --exclude .git --exclude *.tgz --exclude example_values.yaml --exclude gitlab-ingress.yaml --exclude example_install.sh --exclude .github --exclude .gitignore --exclude robot.txt
+          echo "---"
+          ls
+          echo "---"
+          pwd
+          echo "---"
           cd ..
           pwd
           ls
