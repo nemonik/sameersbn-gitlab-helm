@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: nemonik/helm-charts
-          path: ${GITHUB_WORKSPACE}/../helm-charts
+          path: ${GITHUB_WORKSPACE}/../../helm-charts
           ref: master
           
       - name: Package chart
@@ -28,7 +28,7 @@ jobs:
           PROJECT=$(basename ${GITHUB_WORKSPACE})
           PROJECT="${PROJECT/-helm/}"
           pwd
-          cd ..
+          cd ../..
           ls
           cd helm-charts
           mkdir -Rf sources/${PROJECT}
