@@ -27,11 +27,16 @@ jobs:
         run: |
           PROJECT=$(basename ${GITHUB_WORKSPACE})
           PROJECT="${PROJECT/-helm/}"
+          pwd
           cd helm-charts
+          pwd
           mkdir -p sources/${PROJECT}
-          cp -Rf ${GITHUB_WORKSPACE} sources/${PROJECT}
-          rsync -av --progress ${GITHUB_WORKSPACE} sources/${PROJECT} --exclude helm-charts --exclude .git --exclude *.tgz --exclude example_values.yaml --exclude gitlab-ingress.yaml --exclude example_install.sh --exclude .github --exclude .gitignore --exclude robot.txt
+          cd sources/${PROJECT}
+          pwd
+          echo "grr ${GITHUB_WORKSPACE}"
+          rsync -av --progress ${GITHUB_WORKSPACE} . --exclude helm-charts --exclude .git --exclude *.tgz --exclude example_values.yaml --exclude gitlab-ingress.yaml --exclude example_install.sh --exclude .github --exclude .gitignore --exclude robot.txt
           cd ..
+          pwd
           helm package sources/.
           helm repo index --url https://nemonik.github.io/helm-charts/ .  
 
