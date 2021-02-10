@@ -28,7 +28,7 @@ jobs:
           PROJECT=$(basename ${GITHUB_WORKSPACE})
           PROJECT="${PROJECT/-helm/}"
           cd helm-charts
-          mkdir -Rf sources/${PROJECT}
+          mkdir -pf sources/${PROJECT}
           cp -Rf ${GITHUB_WORKSPACE} sources/${PROJECT}
           rsync -av --progress ${GITHUB_WORKSPACE} sources/${PROJECT} --exclude helm-charts --exclude .git --exclude *.tgz --exclude example_values.yaml --exclude gitlab-ingress.yaml --exclude example_install.sh --exclude .github --exclude .gitignore --exclude robot.txt
           cd ..
