@@ -20,21 +20,17 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: nemonik/helm-charts
-          path: ${GITHUB_WORKSPACE}/../../helm-charts
+          path: helm-charts
           ref: master
           
       - name: Package chart
         run: |
           PROJECT=$(basename ${GITHUB_WORKSPACE})
           PROJECT="${PROJECT/-helm/}"
-          pwd
-          cd ../..
-          ls
           cd helm-charts
           mkdir -Rf sources/${PROJECT}
           cp -Rf ${GITHUB_WORKSPACE} sources/${PROJECT}
-          cd ${PROJECT}
-          rm -Rf .git *.tgz example_values.yaml gitlab-ingress.yaml example_install.sh .github .gitignore robot.txt
+          rsync -av --progress ${GITHUB_WORKSPACE} sources/${PROJECT} --exclude helm-charts --exclude .git --exclude *.tgz --exclude example_values.yaml --exclude gitlab-ingress.yaml --exclude example_install.sh --exclude .github --exclude .gitignore --exclude robot.txt
           cd ..
           helm package sources/.
           helm repo index --url https://nemonik.github.io/helm-charts/ .  
