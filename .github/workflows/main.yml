@@ -39,5 +39,5 @@ jobs:
         uses: actions-js/push@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          directory: ${GITHUB_WORKSPACE}/../helm-charts
+          directory: ${GITHUB_WORKSPACE}/helm-charts
           repository: git@github.com:nemonik/helm-charts.git
