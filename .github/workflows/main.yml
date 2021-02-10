@@ -13,25 +13,31 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
+        
       - name: lint chart
         run: helm lint .
-
+                
+      - uses: actions/checkout@v2
+        with:
+          repository: git@github.com:nemonik/helm-charts.git
+          path: ../helm-charts
+          
       - name: Package chart
         run: |
           PROJECT=$(basename ${GITHUB_WORKSPACE})
-          cd /tmp
-          cp -R ${GITHUB_WORKSPACE} ${PROJECT}
+          PROJECT="${PROJECT/-helm/}"
+          cd ../helm-charts
+          mkdir -Rf sources/${PROJECT}
+          cp -Rf ${GITHUB_WORKSPACE} sources/${PROJECT}
           cd ${PROJECT}
-          rm -Rf .git
-          rm *.tgz
-          rm -Rf example_values.yaml gitlab-ingress.yaml example_install.sh .github .gitignore robot.txt
-          helm package .
-          cp *.tgz ${GITHUB_WORKSPACE}/.
-          cd ${GITHUB_WORKSPACE}
-          helm repo index --url https://nemonik.github.io/sameersbn-gitlab-helm/ .
-          
-      - name: Commit and push changes
+          rm -Rf .git *.tgz example_values.yaml gitlab-ingress.yaml example_install.sh .github .gitignore robot.txt
+          cd ..
+          helm package sources/.
+          helm repo index --url https://nemonik.github.io/helm-charts/ .  
+
+      - name: Commit and push changes to my helm chartsr epository
         uses: actions-js/push@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          directory: ${GITHUB_WORKSPACE}/../helm-charts
+          repository: git@github.com:nemonik/helm-charts.git
