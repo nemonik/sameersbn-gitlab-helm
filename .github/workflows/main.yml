@@ -31,6 +31,7 @@ jobs:
           cd helm-charts
           mkdir -p sources
           cd sources
+          rm -Rf $(basename ${GITHUB_WORKSPACE}) 
           rsync -av --progress ${GITHUB_WORKSPACE} . --exclude helm-charts --exclude .git --exclude *.tgz --exclude example_values.yaml --exclude gitlab-ingress.yaml --exclude example_install.sh --exclude .github --exclude .gitignore --exclude robot.txt
           mv $(basename ${GITHUB_WORKSPACE}) ${PROJECT}
           cd .. 
