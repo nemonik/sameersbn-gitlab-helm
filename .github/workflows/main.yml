@@ -40,6 +40,6 @@ jobs:
       - name: Commit and push changes to my helm charts repository
         uses: actions-js/push@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.ACTION_TOKEN }}
           directory: ${{ env.CHARTS }}
           repository: nemonik/helm-charts
