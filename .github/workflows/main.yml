@@ -41,5 +41,5 @@ jobs:
         uses: actions-js/push@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          directory: ${env.CHARTS}
+          directory: ${{ env.CHARTS }}
           repository: git@github.com:nemonik/helm-charts.git
