@@ -1,6 +1,6 @@
 # sameersbn-gitlab-helm
 
-Helm chart for [sameersbn/gitlab](https://github.com/sameersbn/docker-gitlab).
+https://github.com/nemonik/sameersbn-gitlab-helm is Helm chart for [sameersbn/gitlab](https://github.com/sameersbn/docker-gitlab).
 
 ## Requirements
 
