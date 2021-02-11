@@ -43,3 +43,5 @@ jobs:
           github_token: ${{ secrets.ACTION_TOKEN }} 
           directory: ${{ env.CHARTS }}
           repository: nemonik/helm-charts
+          author_name: nemonik
+          author_email: github.com@nemonik.com
