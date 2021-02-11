@@ -20,7 +20,9 @@ The example ingress would expose gitlab on http://gitlab.example.com or you can 
 helm repo add nemonik https://nemonik.github.io/helm-charts/
 helm repo update
 helm search repo gitlab
-helm install gitlab -n gitlab nemonik/gitlab
+wget https://raw.githubusercontent.com/nemonik/sameersbn-gitlab-helm/master/example_values.yaml
+kubectl create namespace gitlab | true
+helm install gitlab nemonik/gitlab -f example_values.yaml --namespace gitlab
 kubectl get pods -n gitlab -w
 ```
 
