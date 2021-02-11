@@ -35,7 +35,7 @@ jobs:
           cd .. 
           helm package sources/*
           helm repo index --url https://nemonik.github.io/helm-charts/ .  
-          echo "CHARTS=$(pwd}" >> $GITHUB_ENV
+          echo "CHARTS=$(pwd)" >> $GITHUB_ENV
 
       - name: Commit and push changes to my helm charts repository
         uses: actions-js/push@master
