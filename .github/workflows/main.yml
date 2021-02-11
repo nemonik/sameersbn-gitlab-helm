@@ -36,10 +36,13 @@ jobs:
           helm package sources/*
           helm repo index --url https://nemonik.github.io/helm-charts/ .  
           echo "CHARTS=$(pwd)" >> $GITHUB_ENV
-
+          
       - name: Commit and push changes to my helm charts repository
-        uses: actions-js/push@master
+        uses: cpina/github-action-push-to-another-repository@master
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.ACTION_TOKEN }}
         with:
-          github_token: ${{ secrets.ACTION_TOKEN }}
-          directory: ${{ env.CHARTS }}
-          repository: nemonik/helm-charts
+          source-directory: 'helm-charts'
+          destination-github-username: 'nemonik'
+          destination-repository-name: 'helm-chart'
+          user-email: github.com@nemonik.com
