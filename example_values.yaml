@@ -1,8 +1,10 @@
 redis:
+  # if you're deploying to k3s w/o a say longhorn or openebs
   persistence:
     storageClassName: local-path
     enabled: true
 
+  # used target the deployment to a specific node 
   nodeAffinity:
     selectorMatch:
       key: 'k3s.io/hostname'
@@ -11,10 +13,12 @@ redis:
 
 
 postgresql:
+  # if you're deploying to k3s w/o a say longhorn or openebs
   persistence:
     storageClassName: local-path
     enabled: true
 
+  # used target the deployment to a specific node 
   nodeAffinity:
     selectorMatch:
       key: 'k3s.io/hostname'
@@ -23,11 +27,13 @@ postgresql:
 
 
 gitlab:
+  # if you're deploying to k3s w/o a say longhorn or openebs
   persistence:
     data:
       storageClassName: local-path
       enabled: true
 
+  # used target the deployment to a specific node 
   nodeAffinity:
     selectorMatch:
       key: 'k3s.io/hostname'
@@ -38,3 +44,9 @@ gitlab:
     host: 'gitlab.example.org'
 
     signupEnabled: 'false'
+    
+    # far from secure. user `pwgen -Bsv1 64` to generate your own keys
+    secrets:
+       dbKeyBase: 'C7WRbbVbVX4czWMFfvwXTKKKx3M9wwsLjfbn3f3nJPr7pPqgkMPwW3w49kHWdqPm'
+       secretKeyBase: 'C7WRbbVbVX4czWMFfvwXTKKKx3M9wwsLjfbn3f3nJPr7pPqgkMPwW3w49kHWdqPm'
+       otpKeyBase: 'C7WRbbVbVX4czWMFfvwXTKKKx3M9wwsLjfbn3f3nJPr7pPqgkMPwW3w49kHWdqPm'
