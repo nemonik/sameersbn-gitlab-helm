@@ -345,7 +345,7 @@ spec:
           {{- if ne .Values.gitlab.env.ssh.host "" }}
           value: {{ .Values.gitlab.env.ssh.host | quote }}
           {{- else }}
-          value: {{ .Values.gitlab.host | quote }}
+          value: {{ .Values.gitlab.env.host | quote }}
           {{- end }}
         - name: GITLAB_SSH_LISTEN_PORT
           value: {{ .Values.gitlab.env.ssh.listenPort | quote }}
