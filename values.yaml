@@ -142,7 +142,7 @@ gitlab:
     ## which the GitLab application will be accessible on the network and
     ## appropriately configures GitLab to generate the correct urls. It does
     ## not affect the port on which the internal nginx server will be listening
-    ## on. Defaults to `443` if `{{ .Values.gitlab.https }}=true`, else defaults
+    ## on. Defaults to `443` if `{{ .Values.gitlab.env.https }}=true`, else defaults
     ## to `80`.
     ##
     port: ''
@@ -188,7 +188,7 @@ gitlab:
 
     email:
       ## The email address for the GitLab server. Defaults to value of
-      ## `{{ .Values.gitlab.smtpUser }}`, else defaults to `example@example.com`.
+      ## `{{ .Values.gitlab.env.smtpUser }}`, else defaults to `example@example.com`.
       ##
       address: 'example@example.com'
 
@@ -198,7 +198,7 @@ gitlab:
       displayName: 'GitLab'
 
       ## The reply-to address of emails sent out by GitLab. Defaults to value of
-      ## `{{ .Values.gitlab.email.address }}`, else defaults to
+      ## `{{ .Values.gitlab.env.email.address }}`, else defaults to
       ## `noreply@example.com`.
       ##
       replyTo: 'noreply@example.com'
@@ -379,7 +379,7 @@ gitlab:
       enabled: 'true'
 
       ## Directory to store the artifacts. Defaults to
-      ## `{{ .Values.gitlab.sharedDir }}/artifacts`.
+      ## `{{ .Values.gitlab.env.sharedDir }}/artifacts`.
       ##
       dir: ''
 
@@ -440,18 +440,18 @@ gitlab:
       connection:
 
         ## Connection Provider for the Object Store. (`AWS` or `Google`).
-        ## Defaults to `{{ .Values.gitlab.objectStoreConnection.provider }}`.
+        ## Defaults to `{{ .Values.gitlab.env.objectStoreConnection.provider }}`.
         ##
         provider: ''
 
         aws:
           ## AWS Access Key ID for the Bucket. Defaults to
-          ## `{{ .Values.gitlab.awsAccessKeyId }}`.
+          ## `{{ .Values.gitlab.env.awsAccessKeyId }}`.
           ##
           accessKeyId: ''
 
           ## AWS Secret Access Key. Defaults to
-          ## `{{ .Values.gitlab.awsSecretAccessKey }}`.
+          ## `{{ .Values.gitlab.env.awsSecretAccessKey }}`.
           ##
           secretAccessKey: ''
 
@@ -476,17 +476,17 @@ gitlab:
         google:
 
           ## Google project. Defaults to
-          ## `{{ .Values.gitlab.objectStore.connection.google.project }}`.
+          ## `{{ .Values.gitlab.env.objectStore.connection.google.project }}`.
           ##
           project: ''
 
           ## Google service account. Defaults to
-          ## `{{ .Values.gitlab.objectStore.connection.google.clientEmail }}`.
+          ## `{{ .Values.gitlab.env.objectStore.connection.google.clientEmail }}`.
           ##
           clientEmail: ''
 
           ## Default Google key file. Defaults to
-          ## `{{ .Values.gitlab.objectStore.connection.google.jsonKeyLocation }}`.
+          ## `{{ .Values.gitlab.env.objectStore.connection.google.jsonKeyLocation }}`.
           jsonKeyLocation: ''
 
     ## Cron notation for the GitLab pipeline schedule worker. Defaults to
@@ -501,7 +501,7 @@ gitlab:
       enabled: 'true'
 
       ## Directory to store the lfs-objects. Defaults to
-      ## `{{ .Values.gitlab.sharedDir }}/lfs-objects`
+      ## `{{ .Values.gitlab.env.sharedDir }}/lfs-objects`
       ##
       objectDir: ''
 
@@ -528,19 +528,19 @@ gitlab:
         connection:
 
           ## Connection Provider for the Object Store. (`AWS` or `Google`).
-          ## Defaults to `{{ .Values.gitlab.objectStore.connection.provider }}`
+          ## Defaults to `{{ .Values.gitlab.env.objectStore.connection.provider }}`
           ## (`AWS`).
           ##
           provider: ''
 
           aws:
             ## AWS Access Key ID for the Bucket. Defaults to
-            ## `{{ .Values.gitlab.awsAccessKeyId }}`
+            ## `{{ .Values.gitlab.env.awsAccessKeyId }}`
             ##
             accessKeyID: ''
 
             ## AWS Secret Access Key. Defaults to
-            ## `{{ .Values.gitlab.awsSecretAccessKey }}`.
+            ## `{{ .Values.gitlab.env.awsSecretAccessKey }}`.
             ##
             secretAccessKey: ''
 
@@ -565,17 +565,17 @@ gitlab:
           google:
 
             ## Google project. Defaults to
-            ## `{{ .Values.gitlab.objectStore.connection.google.project }}`.
+            ## `{{ .Values.gitlab.env.objectStore.connection.google.project }}`.
             ##
             project: ''
 
             ## Google service account. Defaults to
-            ## `{{ .Values.gitlab.objectStore.connection.clientEmail }}`
+            ## `{{ .Values.gitlab.env.objectStore.connection.clientEmail }}`
             ##
             clientEmail: ''
 
             ## Default Google key file. Defaults to `
-            ## `{{ .Values.gitlab.objectStore.connection.google.jsonKeyLocation }}`
+            ## `{{ .Values.gitlab.env.objectStore.connection.google.jsonKeyLocation }}`
             ## (`/gcs/key.json`).
             ##
             jsonKeyLocation: ''
@@ -583,11 +583,11 @@ gitlab:
     uploads:
 
       ## The location where uploads objects are stored. Defaults to
-      ## `{{ .Values.gitlab.sharedDir }}/public`
+      ## `{{ .Values.gitlab.env.sharedDir }}/public`
       ##
       storagePath: ''
 
-      ## Mapping for the `{{ .Values.gitlab.uploads.storagePath }}`.
+      ## Mapping for the `{{ .Values.gitlab.env.uploads.storagePath }}`.
       ## Defaults to `uploads/-/system`
       ##
       baseDir: 'uploads/-/system'
@@ -614,18 +614,18 @@ gitlab:
         connection:
 
           ## Connection Provider for the Object Store. (`AWS` or `Google`).
-          ## Defaults to `{{ .Values.gitlab.objectStore.connection.provider }}`
+          ## Defaults to `{{ .Values.gitlab.env.objectStore.connection.provider }}`
           ## (`AWS`).
           provider: ''
 
           aws:
             ## AWS Access Key ID for the Bucket. Defaults to
-            ## `{{ .Values.gitlab.awsAccessKeyId }}`.
+            ## `{{ .Values.gitlab.env.awsAccessKeyId }}`.
             ##
             accessKeyID: ''
 
             ## AWS Secret Access Key.
-            ## Defaults to `{{ .Values.gitlab.awsSecretAccessKey }}`/
+            ## Defaults to `{{ .Values.gitlab.env.awsSecretAccessKey }}`/
             ##
             secretAccessKey: ''
 
@@ -650,17 +650,17 @@ gitlab:
           google:
 
             ## Google project. Defaults to
-            ## `{{ .Values.gitlab.objectStore.connection.google.project }}`.
+            ## `{{ .Values.gitlab.env.objectStore.connection.google.project }}`.
             ##
             project: ''
 
             ## Google service account. Defaults to
-            ## `{{ .Values.gitlab.objectStore.connection.clientEmail }}`.
+            ## `{{ .Values.gitlab.env.objectStore.connection.clientEmail }}`.
             ##
             clientEmail: ''
 
             ## Default Google key file. Defaults to
-            ## `{{ .Values.gitlab.objectStore.connection.google.jsonKeyLocation }}`
+            ## `{{ .Values.gitlab.env.objectStore.connection.google.jsonKeyLocation }}`
             ## (`/gcs/key.json`).
             ##
             jsonKeyLocation: ''
@@ -678,7 +678,7 @@ gitlab:
 
     ssh:
 
-      ## The ssh host. Defaults to **{{ .Values.gitlab.host }}**.
+      ## The ssh host. Defaults to **{{ .Values.gitlab.env.host }}**.
       ##
       host: ''
 
@@ -690,7 +690,7 @@ gitlab:
       ##
       maxstartups: '10:30:60'
 
-      ## The ssh port number. Defaults to `{{ .Values.gitlab.ssh.listenPort }}`.
+      ## The ssh port number. Defaults to `{{ .Values.gitlab.env.ssh.listenPort }}`.
       ##
       port: ''
 
@@ -727,7 +727,7 @@ gitlab:
       keyPath: 'config/registry.key'
 
       ## Directory to store the container images will be shared with registry.
-      ## Defaults to `{{ .Values.gitlab.sharedDir }}/registry`.
+      ## Defaults to `{{ .Values.gitlab.env.sharedDir }}/registry`.
       dir: ''
 
       ## Sets the GitLab Registry Issuer. Defaults to `gitlab-issuer`.
@@ -737,7 +737,7 @@ gitlab:
       ## Set to `true` to generate SSL internal Registry keys. Used to
       ## communicate between a Docker Registry and GitLab. It will generate a
       ## self-signed certificate key at the location given by
-      ## `{{ .Values.gitlab.registry.keyPath }}`, e.g. `/certs/registry.key`.
+      ## `{{ .Values.gitlab.env.registry.keyPath }}`, e.g. `/certs/registry.key`.
       ## And will generate the certificate file at the same location, with the
       ## same name, but changing the extension from `key` to `crt`, e.g.
       ## `/certs/registry.crt`
@@ -755,7 +755,7 @@ gitlab:
       domain: 'example.com'
 
       ## Sets GitLab Pages directory where all pages will be stored. Defaults to
-      ## `{{ .Values.gitlab.sharedDir }}/pages`.
+      ## `{{ .Values.gitlab.env.sharedDir }}/pages`.
       dir: ''
 
       ## Sets GitLab Pages Port that will be used in NGINX. Defaults to `80`.
@@ -885,7 +885,7 @@ gitlab:
       dhparamPath: '/home/git/data/certs/dhparam.pem'
 
       ## Enable verification of client certificates using the
-      ## `{{ .Values.gitlab.ssl.caCertificatesPath }}` file or setting this
+      ## `{{ .Values.gitlab.env.ssl.caCertificatesPath }}` file or setting this
       ## variable to `on`. Defaults to `off`.
       ##
       verifyClient: 'off'
@@ -961,8 +961,8 @@ gitlab:
 
       ##  Advanced configuration option for the `proxy_set_header
       ## X-Forwarded-Proto` setting in the gitlab nginx vHost configuration.
-      ## Defaults to `https` when `{{ .Values.gitlab.https }}` is `true` else
-      ## defaults to `{{ .Values.gitlab.scheme }}`.
+      ## Defaults to `https` when `{{ .Values.gitlab.env.https }}` is `true` else
+      ## defaults to `{{ .Values.gitlab.env.scheme }}`.
       ##
       xForwardingProto: ''
 
@@ -973,7 +973,7 @@ gitlab:
       realIpRecursive: 'off'
 
       ## You can have NGINX look for a different address to use by adding your
-      ## reverse proxy to the `{{ .Values.gitlab.nginx.realIpTrustedAddresses }}`.
+      ## reverse proxy to the `{{ .Values.gitlab.env.nginx.realIpTrustedAddresses }}`.
       ## Currently only a single entry is permitted. No defaults.
       ##
       realIpTrustedAddresses: ''
@@ -1086,7 +1086,7 @@ gitlab:
     smtp:
 
       ## Enable mail delivery via SMTP. Defaults to `true` if
-      ## `{{ .Values.gitlab.smtpUser }}` is defined, else defaults to `false`.
+      ## `{{ .Values.gitlab.env.smtpUser }}` is defined, else defaults to `false`.
       ##
       enabled: 'false'
 
@@ -1124,7 +1124,7 @@ gitlab:
       openSslVerifyMode: 'none'
 
       ## Specify the SMTP authentication method. Defaults to `login` if
-      ## `{{ .Values.gitlab.smtpUser }}` is set.
+      ## `{{ .Values.gitlab.env.smtpUser }}` is set.
       ##
       authentication: ''
 
@@ -1146,7 +1146,7 @@ gitlab:
     imap:
 
       ## Enable mail delivery via IMAP. Defaults to `true` if
-      ## `{{ .Values.gitlab.imap.user }}` is  defined, else defaults to `false`.
+      ## `{{ .Values.gitlab.env.imap.user }}` is  defined, else defaults to `false`.
       ##
       enabled: 'false'
 
@@ -1207,8 +1207,8 @@ gitlab:
       method: 'plain'
 
       ## LDAP verify ssl certificate for installations that are using
-      ## `{{ if eq .Values.gitlab.ldap.method "simple_tls" }}` or
-      ## `{{ if eq .Values.gitlab.ldap.method "start_tls" }}`.
+      ## `{{ if eq .Values.gitlab.env.ldap.method "simple_tls" }}` or
+      ## `{{ if eq .Values.gitlab.env.ldap.method "start_tls" }}`.
       ## Defaults to `true`.
       ##
       verrifySsl: 'true'
@@ -1242,7 +1242,7 @@ gitlab:
 
       ## If enabled, GitLab will ignore everything after the first '@' in the
       ## LDAP username submitted by the user on login. Defaults to `false` if
-      ## `{{ .Values.gitlab.ldap.uid }}` is `userPrincipalName` else `true`.
+      ## `{{ .Values.gitlab.env.ldap.uid }}` is `userPrincipalName` else `true`.
       ##
       allowUsernameOrEmailLogin: ''
 
@@ -1458,8 +1458,8 @@ gitlab:
       saml:
 
         ## The URL at which the SAML assertion should be received. When
-        ## `{{ if eq .Values.gitlab.https true }}` defaults to `https://{{ .Values.gitlab.host }}/users/auth/saml/callback`
-        ## else defaults to `http://{{ .Values.gitlab.host }}/users/auth/saml/callback`.
+        ## `{{ if eq .Values.gitlab.env.https true }}` defaults to `https://{{ .Values.gitlab.env.host }}/users/auth/saml/callback`
+        ## else defaults to `http://{{ .Values.gitlab.env.host }}/users/auth/saml/callback`.
         ##
         assertionConsumerServiceUrl: ''
 
@@ -1471,9 +1471,9 @@ gitlab:
         ##
         idpSsoTargetUrl: ''
 
-        ## The name of your application. When `{{ eq .Values.gitlab.https true }}`
-        ##  defaults to `https://{{ .Values.gitlab.host }}` else defaults to
-        ## `http://{{ .Values.gitlab.host }}`.
+        ## The name of your application. When `{{ eq .Values.gitlab.env.https true }}`
+        ##  defaults to `https://{{ .Values.gitlab.env.host }}` else defaults to
+        ## `http://{{ .Values.gitlab.env.host }}`.
         ##
         issuer: ''
 
@@ -1661,7 +1661,7 @@ gitlab:
       uid: '1000'
 
       ## Sets the gid for group `git` to the specified gid. Defaults to
-      ## `{{ .Values.gitlab.usermapUid }}` if defined, else defaults to `1000`.
+      ## `{{ .Values.gitlab.env.usermapUid }}` if defined, else defaults to `1000`.
       ##
       gid: '1000'
 
