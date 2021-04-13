@@ -342,14 +342,21 @@ spec:
           value: {{ .Values.gitlab.env.mattermost.url | quote }}
 
         - name: GITLAB_SSH_HOST
+          {{- if ne .Values.gitlab.env.ssh.host ne "" }}
           value: {{ .Values.gitlab.env.ssh.host | quote }}
+          {{- else }}
+          value: {{ .Values.gitlab.host | quote }}
+          {{- end }}
         - name: GITLAB_SSH_LISTEN_PORT
-          value: {{ .Values.gitlab.env.ssh.port | quote }}
+          value: {{ .Values.gitlab.env.ssh.listenPort | quote }}
         - name: GITLAB_SSH_MAXSTARTUPS
           value: {{ .Values.gitlab.env.ssh.maxstartups | quote }}
         - name: GITLAB_SSH_PORT
+          {{- if ne .Values.gitlab.env.ssh.port ne "" }}      
           value: {{ .Values.gitlab.env.ssh.port | quote }}
-
+          {{- else }}
+          value: {{ .Values.gitlab.env.ssh.listenPort | quote }}
+          {{- end }}
         - name: GITLAB_RELATIVE_URL_ROOT
           value: {{ .Values.gitlab.env.relativeUrlRoot | quote }}
 
