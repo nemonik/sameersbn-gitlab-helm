@@ -2,8 +2,8 @@ apiVersion: v2
 name: gitlab
 description: A Helm chart for GitLab
 type: application
-version: 13.10.2
-appVersion: 13.10.2
+version: 13.10.3
+appVersion: 13.10.3
 maintainers:
   - name: Michael Joseph Walsh
     email: github.com@nemonik.com

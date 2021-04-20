@@ -91,7 +91,7 @@ gitlab:
   ##
   image:
     repository: 'sameersbn/gitlab'
-    tag: '13.10.2'
+    tag: '13.10.3'
     pullPolicy: 'IfNotPresent'
 
   persistence:
@@ -120,6 +120,10 @@ gitlab:
     requests:
       cpu: '500m'
       memory: '1Gi'
+
+  ## Exposes the GitLab service on the specified port within the cluster.  Default is
+  ## `22`.
+  servicePort: '22'
 
   ## All the values are environmental and must all be strings
   env:

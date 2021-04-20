@@ -15,7 +15,7 @@ spec:
       port: 80
     - name: ssh
       targetPort: ssh
-      port: 22
+      port: {{ .Values.gitlab.servicePort }}
   selector:
     app: {{ template "gitlab.name" . }}
     release: {{ .Release.Name }}
