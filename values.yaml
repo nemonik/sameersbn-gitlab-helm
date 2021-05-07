@@ -121,10 +121,10 @@ gitlab:
   livenessProbe:
     tcpSocket:
       port: 80
-      initialDelaySeconds: 180
-      periodSeconds: 10
-      timeoutSeconds: 15
-      failureThreshold: 3
+    initialDelaySeconds: 180
+    periodSeconds: 10
+    timeoutSeconds: 15
+    failureThreshold: 3
         
   readinessProbe:
     tcpSocket:
