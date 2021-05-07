@@ -105,13 +105,6 @@ gitlab:
       storageClassName: 'default'
       accessMode: 'ReadWriteOnce'
 
-  ## Select node(s) to deploy to matching one specific label name and one or 
-  ## more values
-  nodeAffinity:
-    selectorMatch:
-      key: ''
-      values: ''
-
   ## Set the resource limits for GitLab
   resources:
     limits:
@@ -124,6 +117,22 @@ gitlab:
   ## Exposes the GitLab service on the specified port within the cluster.  Default is
   ## `22`.
   servicePort: '22'
+
+  livenessProbe:
+    tcpSocket:
+      port: 80
+      initialDelaySeconds: 180
+      periodSeconds: 10
+      timeoutSeconds: 15
+      failureThreshold: 3
+        
+  readinessProbe:
+    tcpSocket:
+      port: 80
+    initialDelaySeconds: 180
+    periodSeconds: 10
+    timeoutSeconds: 15
+    failureThreshold: 3
 
   ## All the values are environmental and must all be strings
   env:

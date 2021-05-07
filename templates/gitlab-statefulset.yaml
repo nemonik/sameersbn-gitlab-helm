@@ -23,19 +23,9 @@ spec:
         release: {{ .Release.Name }}
         component: gitlab
     spec:
-      {{- if and .Values.gitlab.nodeAffinity.selectorMatch.key .Values.gitlab.nodeAffinity.selectorMatch.values }}
+{{- with .Values.gitlab.affinity }}
       affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: {{ .Values.gitlab.nodeAffinity.selectorMatch.key }}
-                operator: In
-                values:
-                {{- range .Values.gitlab.nodeAffinity.selectorMatch.values }}
-                - {{ . }}
-                {{- end }}
-      {{- end }}
+{{ toYaml . | indent 8 }}
       containers:
       - name: gitlab
         image: {{ .Values.gitlab.image.repository }}:{{ .Values.gitlab.image.tag }}
@@ -940,20 +930,15 @@ spec:
         volumeMounts:
         - mountPath: /home/git/data
           name: gitlab-data
-        livenessProbe:
-          tcpSocket:
-            port: 80
-          initialDelaySeconds: 180
-          periodSeconds: 10
-          timeoutSeconds: 15
-          failureThreshold: 3
-        readinessProbe:
-          tcpSocket:
-            port: 80
-          initialDelaySeconds: 180
-          periodSeconds: 10
-          timeoutSeconds: 15
-          failureThreshold: 3
+{{- with .Values.gitlab.livenessProbe }}
+      livenessProbe:
+{{ toYaml . | indent 8 }}
+{{- with .Values.gitlab.readinessProbe }}
+      readinessProbe:
+{{ toYaml . | indent 8 }}
+{{- with .Values.gitlab.hostAliases }}
+      hostAliases:
+{{ toYaml . | indent 8 }}
       volumes:
       - name: gitlab-data
       {{- if .Values.gitlab.persistence.data.enabled }}
@@ -962,7 +947,3 @@ spec:
       {{- else }}
         emptyDir: {}
       {{- end }}
-{{- with .Values.hostAliases }}
-      hostAliases:
-{{ toYaml . | indent 8 }}
-    {{- end }}
