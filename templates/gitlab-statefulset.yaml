@@ -26,6 +26,7 @@ spec:
 {{- with .Values.gitlab.affinity }}
       affinity:
 {{ toYaml . | indent 8 }}
+    {{- end }}
       containers:
       - name: gitlab
         image: {{ .Values.gitlab.image.repository }}:{{ .Values.gitlab.image.tag }}
@@ -933,12 +934,15 @@ spec:
 {{- with .Values.gitlab.livenessProbe }}
       livenessProbe:
 {{ toYaml . | indent 8 }}
+    {{- end }}
 {{- with .Values.gitlab.readinessProbe }}
       readinessProbe:
 {{ toYaml . | indent 8 }}
+    {{- end }}
 {{- with .Values.gitlab.hostAliases }}
       hostAliases:
 {{ toYaml . | indent 8 }}
+    {{- end }}
       volumes:
       - name: gitlab-data
       {{- if .Values.gitlab.persistence.data.enabled }}
