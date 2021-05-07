@@ -24,18 +24,9 @@ spec:
         release: {{ .Release.Name }}
         component: redis
     spec:
-      {{- if and .Values.gitlab.nodeAffinity.selectorMatch.key .Values.gitlab.nodeAffinity.selectorMatch.values }}
+      {{- with .Values.gitlab.affinity }}
       affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: {{ .Values.gitlab.nodeAffinity.selectorMatch.key }}
-                operator: In
-                values:
-                {{- range .Values.gitlab.nodeAffinity.selectorMatch.values }}
-                - {{ . }}
-                {{- end }}
+{{ toYaml . | indent 8 }}
       {{- end }}
       containers:
       - name: redis
