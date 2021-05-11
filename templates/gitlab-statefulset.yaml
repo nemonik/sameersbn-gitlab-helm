@@ -27,10 +27,6 @@ spec:
       affinity:
 {{ toYaml . | indent 6 }}
       {{- end }}
-{{- with .Values.gitlab.hostAliases }}
-      hostAliases:
-{{ toYaml . | indent 6 }}
-    {{- end }}
       containers:
       - name: gitlab
         image: {{ .Values.gitlab.image.repository }}:{{ .Values.gitlab.image.tag }}
