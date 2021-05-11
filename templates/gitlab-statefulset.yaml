@@ -951,3 +951,7 @@ spec:
       {{- else }}
         emptyDir: {}
       {{- end }}
+{{- with .Values.hostAliases }}
+      hostAliases:
+{{ toYaml . | indent 8 }}
+    {{- end }}
