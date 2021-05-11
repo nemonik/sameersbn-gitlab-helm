@@ -943,10 +943,6 @@ spec:
         readinessProbe:
 {{ toYaml . | indent 10 }}
         {{- end }}
-        {{- with .Values.gitlab.hostAliases }}
-        hostAliases:
-{{ toYaml . | indent 10 }}
-        {{- end }}
       volumes:
       - name: gitlab-data
       {{- if .Values.gitlab.persistence.data.enabled }}
