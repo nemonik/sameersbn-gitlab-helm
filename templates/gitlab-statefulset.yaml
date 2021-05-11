@@ -27,7 +27,7 @@ spec:
       affinity:
 {{ toYaml . | indent 8 }}
       {{- end }}
-{{- with .Values.hostAliases }}
+{{- with .Values.gitlab.hostAliases }}
       hostAliases:
 {{ toYaml . | indent 8 }}
     {{- end }}
