@@ -25,11 +25,11 @@ spec:
     spec:
       {{- with .Values.gitlab.affinity }}
       affinity:
-{{ toYaml . | indent 8 }}
+{{ toYaml . | indent 6 }}
       {{- end }}
 {{- with .Values.gitlab.hostAliases }}
       hostAliases:
-{{ toYaml . | indent 8 }}
+{{ toYaml . | indent 6 }}
     {{- end }}
       containers:
       - name: gitlab
