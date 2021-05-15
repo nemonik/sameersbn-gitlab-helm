@@ -1,3 +1,10 @@
+## Pass in the name of a Kubernetes Secret that contains the needed secret for when you
+## pull images from a private Docke image repository.
+## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+##
+imagePullSecrets: []
+# - name: "image-pull-secret"
+
 redis:
 
   ## Deploy Redis. Default is boolean `true`.
@@ -94,6 +101,24 @@ gitlab:
     tag: '13.10.3'
     pullPolicy: 'IfNotPresent'
 
+  service:
+    type: ClusterIP
+    http:
+      port: 80
+    ssh: 
+      port: 22
+
+  ingress:
+    enable: false
+    annotations:
+    # traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    # traefik.ingress.kubernetes.io/router.tls: 'true'
+    hosts:
+      - host: gitlab.example.com
+        paths:
+          -  "/"
+    tls: []
+
   persistence:
     ## Volume used to store GitLab data. Default is boolean `false`.
     ##
@@ -105,7 +130,13 @@ gitlab:
       storageClassName: 'default'
       accessMode: 'ReadWriteOnce'
 
+  ## Extra annotations to the GitLab pods
+  podAnnotations: {}
+
+  podSecurityContext: {}
+
   ## Set the resource limits for GitLab
+  ## Normally this would be user defined, but GitLab is beefy and needs this to work.
   resources:
     limits:
       cpu: '2'
@@ -114,9 +145,11 @@ gitlab:
       cpu: '500m'
       memory: '1Gi'
 
-  ## Exposes the GitLab service on the specified port within the cluster.  Default is
-  ## `22`.
-  servicePort: '22'
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
 
   livenessProbe:
     tcpSocket:

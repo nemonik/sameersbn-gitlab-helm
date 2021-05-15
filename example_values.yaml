@@ -33,6 +33,24 @@ gitlab:
       storageClassName: local-path
       enabled: true
 
+  service:
+    type: ClusterIP
+    http:
+      port: 80
+    ssh: 
+      port: 2022
+
+  ingress:
+    enabled: true
+    annotations:
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      traefik.ingress.kubernetes.io/router.tls: 'true'
+    hosts:
+      - host: gitlab.example.com
+        paths:
+          -  "/"
+    tls: []
+
   # used target the deployment to a specific node 
   nodeAffinity:
     selectorMatch:
