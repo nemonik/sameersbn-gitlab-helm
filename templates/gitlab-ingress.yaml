@@ -1,4 +1,4 @@
-{{- if and .Values.gitlab.ingress.enabled -}}
+{{- if .Values.gitlab.ingress.enabled }}
 {{- $kubeVersion := .Capabilities.KubeVersion.GitVersion   -}}
 {{- if semverCompare ">=1.14-0" $kubeVersion -}}
 {{- $fullName := include "gitlab.fullname" . -}}

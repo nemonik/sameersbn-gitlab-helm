@@ -3,11 +3,8 @@ kind: Service
 metadata:
   name: {{ include "gitlab.fullname" . }}
   labels:
-    app: {{ include "gitlab.name" . }}
-    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
-    component: gitlab
+    {{- include "gitlab.labels" . | nindent 4 }}
+    app.kubernetes.io/component: gitlab
 spec:
   type: {{ .Values.gitlab.service.type }}
   ports:
@@ -20,7 +17,6 @@ spec:
       port: {{ .Values.gitlab.service.ssh.port }}
       protocol: TCP
   selector:
-    app: {{ template "gitlab.name" . }}
-    release: {{ .Release.Name }}
-    component: gitlab
+    {{- include "gitlab.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/component: gitlab
 

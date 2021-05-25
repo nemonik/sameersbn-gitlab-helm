@@ -98,7 +98,7 @@ gitlab:
   ##
   image:
     repository: 'sameersbn/gitlab'
-    tag: '13.10.3'
+    tag: '13.12'
     pullPolicy: 'IfNotPresent'
 
   service:
