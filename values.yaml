@@ -109,7 +109,7 @@ gitlab:
       port: 22
 
   ingress:
-    enable: false
+    enabled: false
     annotations:
     # traefik.ingress.kubernetes.io/router.entrypoints: websecure
     # traefik.ingress.kubernetes.io/router.tls: 'true'
