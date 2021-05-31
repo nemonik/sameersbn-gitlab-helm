@@ -28,7 +28,7 @@ spec:
     {{- end }}
       containers:
         - name: gitlab
-          image: {{ .Values.gitlab.image.repository }}:{{ .Values.gitlab.image.tag | default .Chart.AppVersion }}"
+          image: {{ .Values.gitlab.image.repository }}:{{ .Values.gitlab.image.tag | default .Chart.AppVersion }}
           imagePullPolicy: {{ .Values.gitlab.image.pullPolicy }}
           resources:
             limits:
