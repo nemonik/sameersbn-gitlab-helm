@@ -1,9 +1,10 @@
 ## Pass in the name of a Kubernetes Secret that contains the needed secret for when you
-## pull images from a private Docke image repository.
+## pull images from a private Docker image repository.
+##
 ## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
 ##
 imagePullSecrets: []
-# - name: "image-pull-secret"
+#  - name: regcred
 
 redis:
 
@@ -15,7 +16,7 @@ redis:
   ##
   image:
     repository: redis
-    tag: 5.0.9
+    tag: 6.2
     pullPolicy: IfNotPresent
 
   persistence:
@@ -30,10 +31,16 @@ redis:
 
   ## Select node(s) to deploy to matching one specific label name and one or
   ## more values
-  nodeAffinity:
-    selectorMatch:
-      key: ''
-      values: ''
+  ##
+  affinity: {}
+  #    nodeAffinity:
+  #      requiredDuringSchedulingIgnoredDuringExecution:
+  #        nodeSelectorTerms:
+  #        - matchExpressions:
+  #          - key: 'k3s.io/hostname'
+  #            operator: In
+  #            values:
+  #            - 'k3s-agent-1.example.com'
 
   ## The port Redis listens on. The default is `6379`.
   ##
@@ -49,7 +56,7 @@ postgresql:
   ##
   image:
     repository: 'sameersbn/postgresql'
-    tag: '11-20200524'
+    tag: '12-20200524'
     pullPolicy: 'IfNotPresent'
 
   persistence:
@@ -64,10 +71,16 @@ postgresql:
 
   ## Select node(s) to deploy to matching one specific label name and one or
   ## more values
-  nodeAffinity:
-    selectorMatch:
-      key: ''
-      values: ''
+  ##
+  affinity: {}
+  #    nodeAffinity:
+  #      requiredDuringSchedulingIgnoredDuringExecution:
+  #        nodeSelectorTerms:
+  #        - matchExpressions:
+  #          - key: 'k3s.io/hostname'
+  #            operator: In
+  #            values:
+  #            - 'k3s-agent-1.example.com'
 
   ## The port PostgreSQL listens on. The default is `5432`.
   ##
@@ -98,7 +111,7 @@ gitlab:
   ##
   image:
     repository: 'sameersbn/gitlab'
-    tag: '13.12.0'
+    tag: '14.1.1-1'
     pullPolicy: 'IfNotPresent'
 
   service:
@@ -149,7 +162,18 @@ gitlab:
 
   tolerations: []
 
+  ## Select node(s) to deploy to matching one specific label name and one or
+  ## more values
+  ##
   affinity: {}
+  #    nodeAffinity:
+  #      requiredDuringSchedulingIgnoredDuringExecution:
+  #        nodeSelectorTerms:
+  #        - matchExpressions:
+  #          - key: 'k3s.io/hostname'
+  #            operator: In
+  #            values:
+  #            - 'k3s-agent-1.example.com'
 
   livenessProbe:
     tcpSocket:
