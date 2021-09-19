@@ -24,7 +24,7 @@ jobs:
           path: helm-charts
           ref: master
           
-      - name: Package chart
+      - name: Package and push chart
         run: |
           PROJECT=$(basename ${GITHUB_WORKSPACE})
           PROJECT="${PROJECT/-helm/}"
