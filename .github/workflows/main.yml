@@ -23,6 +23,7 @@ jobs:
           token: ${{ secrets.ACTION_TOKEN }}
           path: helm-charts
           ref: master
+          fetch-depth: 0
           
       - name: Package chart
         run: |
