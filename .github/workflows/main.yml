@@ -36,7 +36,7 @@ jobs:
           cd .. 
           helm package sources/*
           helm repo index --url https://nemonik.github.io/helm-charts/ .  
-          git conif user.name nemonik
+          git config user.name nemonik
           git config user.email github.com@nemonik.com 
           git add .
           git commit -m "generated"
